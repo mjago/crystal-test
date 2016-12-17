@@ -5,7 +5,7 @@
 require "io/console"
 require "colorize"
 
-ary = [:black,
+colors = [:black,
        :red,
        :green,
        :yellow,
@@ -23,13 +23,19 @@ ary = [:black,
        :white
       ]
 
-10.times do
-  ary.each do |x|
-    puts "abcdefghijklmnopqrstuvwxyz".colorize(x).mode(:underline)
+count = 1
+colors.each_with_index do |x, idx|
+  spawn do
+    sleep idx / 100.0
+    puts "here we are 3".colorize(x).mode(:underline)
+    count += 1
   end
 end
 
-puts `ls -l`
+while count < colors.size
+  sleep 0.1
+end
+#puts `ls -l`
 
 exit 0
 
